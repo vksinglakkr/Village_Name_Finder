@@ -1,9 +1,126 @@
-<form action="https://vinodnic.app.n8n.cloud/webhook/village-finder" method="post">
-  <label>Latitude:</label>
-  <input type="text" name="Latitude" required><br><br>
-  
-  <label>Longitude:</label>
-  <input type="text" name="Longitude" required><br><br>
-  
-  <input type="submit" value="Find Village">
-</form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Village Data Form</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: #f0f2f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .form-container {
+      background: #fff;
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 500px;
+    }
+
+    .form-container h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #333;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      color: #555;
+      font-weight: bold;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+
+    input[type="submit"] {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background: #4CAF50;
+      color: white;
+      font-size: 18px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    input[type="submit"]:hover {
+      background: #45a049;
+    }
+
+    .success-msg {
+      margin-top: 15px;
+      text-align: center;
+      color: green;
+      font-weight: bold;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-container">
+    <h2>Village Data Form</h2>
+    <form id="villageForm" method="POST" action="https://your-webhook-url.com">
+      <div class="form-group">
+        <label for="village_name">Village Name</label>
+        <input type="text" id="village_name" name="Village_Name" placeholder="Enter Village Name" required>
+      </div>
+      <div class="form-group">
+        <label for="latitude">Latitude</label>
+        <input type="text" id="latitude" name="Latitude" placeholder="Enter Latitude" required>
+      </div>
+      <div class="form-group">
+        <label for="longitude">Longitude</label>
+        <input type="text" id="longitude" name="Longitude" placeholder="Enter Longitude" required>
+      </div>
+      <input type="submit" value="Submit">
+      <div class="success-msg" id="successMsg">Data submitted successfully!</div>
+    </form>
+  </div>
+
+  <script>
+    const form = document.getElementById('villageForm');
+    const successMsg = document.getElementById('successMsg');
+
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const formData = new FormData(form);
+
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: formData
+        });
+
+        if (response.ok) {
+          successMsg.style.display = 'block';
+          form.reset();
+        } else {
+          alert('Error submitting data!');
+        }
+      } catch (error) {
+        alert('Error submitting data!');
+      }
+    });
+  </script>
+
+</body>
+</html>
