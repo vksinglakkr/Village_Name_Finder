@@ -3,124 +3,64 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Village Data Form</title>
+  <title>Latitude & Longitude Input</title>
   <style>
     body {
-      font-family: 'Arial', sans-serif;
-      background: #f0f2f5;
+      font-family: Arial, sans-serif;
+      background-color: #f0f4f8;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
-      margin: 0;
     }
-
     .form-container {
-      background: #fff;
-      padding: 30px 40px;
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-      width: 100%;
-      max-width: 500px;
+      background-color: #ffffff;
+      padding: 25px 35px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      width: 300px;
     }
-
-    .form-container h2 {
-      text-align: center;
-      margin-bottom: 25px;
-      color: #333;
-    }
-
-    .form-group {
-      margin-bottom: 20px;
-    }
-
     label {
       display: block;
-      margin-bottom: 6px;
-      color: #555;
+      margin-top: 15px;
       font-weight: bold;
+      color: #333;
     }
-
     input[type="text"] {
       width: 100%;
-      padding: 10px 12px;
-      border-radius: 8px;
+      padding: 8px 10px;
+      margin-top: 5px;
       border: 1px solid #ccc;
-      font-size: 16px;
+      border-radius: 5px;
+      font-size: 14px;
     }
-
-    input[type="submit"] {
+    button {
+      margin-top: 20px;
       width: 100%;
-      padding: 12px;
+      padding: 10px 0;
+      background-color: #007BFF;
+      color: #fff;
       border: none;
-      border-radius: 8px;
-      background: #4CAF50;
-      color: white;
-      font-size: 18px;
+      border-radius: 5px;
+      font-size: 16px;
       cursor: pointer;
-      transition: background 0.3s ease;
     }
-
-    input[type="submit"]:hover {
-      background: #45a049;
-    }
-
-    .success-msg {
-      margin-top: 15px;
-      text-align: center;
-      color: green;
-      font-weight: bold;
-      display: none;
+    button:hover {
+      background-color: #0069d9;
     }
   </style>
 </head>
 <body>
-
   <div class="form-container">
-    <h2>Village Data Form</h2>
-    <form id="villageForm" method="POST" action="https://your-webhook-url.com">
-      <div class="form-group">
-        <label for="village_name">Village Name</label>
-        <input type="text" id="village_name" name="Village_Name" placeholder="Enter Village Name" required>
-      </div>
-      <div class="form-group">
-        <label for="latitude">Latitude</label>
-        <input type="text" id="latitude" name="Latitude" placeholder="Enter Latitude" required>
-      </div>
-      <div class="form-group">
-        <label for="longitude">Longitude</label>
-        <input type="text" id="longitude" name="Longitude" placeholder="Enter Longitude" required>
-      </div>
-      <input type="submit" value="Submit">
-      <div class="success-msg" id="successMsg">Data submitted successfully!</div>
+    <form action="YOUR_WEBHOOK_URL" method="post">
+      <label for="latitude">Latitude:</label>
+      <input type="text" id="latitude" name="latitude" placeholder="Enter Latitude" required>
+
+      <label for="longitude">Longitude:</label>
+      <input type="text" id="longitude" name="longitude" placeholder="Enter Longitude" required>
+
+      <button type="submit">Submit</button>
     </form>
   </div>
-
-  <script>
-    const form = document.getElementById('villageForm');
-    const successMsg = document.getElementById('successMsg');
-
-    form.addEventListener('submit', async function(e) {
-      e.preventDefault();
-      const formData = new FormData(form);
-
-      try {
-        const response = await fetch(form.action, {
-          method: 'POST',
-          body: formData
-        });
-
-        if (response.ok) {
-          successMsg.style.display = 'block';
-          form.reset();
-        } else {
-          alert('Error submitting data!');
-        }
-      } catch (error) {
-        alert('Error submitting data!');
-      }
-    });
-  </script>
-
 </body>
 </html>
